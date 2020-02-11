@@ -365,15 +365,23 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isArmstrongNumber(int input) {
-		int digits = 0;
 		
-		while (input != 0) {
-			input /= 10;
-			++digits;
+		int temp = input;
+		int digits = String.valueOf(input).length();
+		int sum = 0;
+		
+		
+		while (temp != 0) {
+			int lastNumb = temp % 10;
+			sum += Math.pow(lastNumb, digits);
+			temp /= 10;
 		}
 		
-	
-		return false;
+		if (sum == input) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
