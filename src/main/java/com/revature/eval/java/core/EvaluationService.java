@@ -1,6 +1,7 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,9 +31,17 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
-	}
+		
+		String acronym = "";
+		acronym += phrase.toUpperCase().charAt(0);
+
+		for (int i=1; i<= phrase.length() - 1; i++) {
+			if (phrase.charAt(i - 1) == ' ' || phrase.charAt(i - 1) == '-') {
+		               acronym += phrase.toUpperCase().charAt(i);
+			}
+		}
+		return acronym;
+		}
 
 	/**
 	 * 3. Determine if a triangle is equilateral, isosceles, or scalene. An
@@ -84,20 +93,29 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
+			if (sideOne == sideTwo  && sideTwo == sideThree) {
+				return true;
+			} else {
 			return false;
+		}
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
+			if (sideOne == sideTwo || sideTwo == sideThree || sideOne == sideThree) {
+				return true;
+			} else {
 			return false;
+		}
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
+			if (sideOne != sideTwo && sideTwo != sideThree && sideOne != sideThree) {
+				return true;
+			} else {
 			return false;
 		}
 
+	}
 	}
 
 	/**
@@ -116,9 +134,72 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
-	}
+		String scrabble = "";
+		scrabble += string.toUpperCase();
+
+		int score = 0;
+
+		for (int i=0; i< scrabble.length(); i++) {
+		char letter = scrabble.charAt(i);
+
+		switch(letter) {
+		case 'A':
+		case 'E':
+		case 'I':
+		case 'O':
+		case 'U':
+		case 'L':
+		case 'N':
+		case 'R':
+		case 'S':
+		case 'T':
+		score += 1;
+		break;
+
+		case 'D':
+		case 'G':
+		score += 2;
+		break;
+
+		case 'B':
+		case 'C':
+		case 'M':
+		case 'P':
+		score += 3;
+		break;
+
+		case 'F':
+		case 'H':
+		case 'V':
+		case 'W':
+		case 'Y':
+		score += 4;
+		break;
+
+		case 'K':
+		score += 5;
+		break;
+
+		case 'J':
+		case 'X':
+		score += 8;
+		break;
+
+		case 'Q':
+		case 'Z':
+		score += 10;
+		break;
+
+		default:
+		score += 0;
+		break;
+
+		}
+		}
+
+
+		return score;
+		}
 
 	/**
 	 * 5. Clean up user-entered phone numbers so that they can be sent SMS messages.
@@ -152,8 +233,8 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String fixed = string.replaceAll("[^0-9]","");
+		return fixed;
 	}
 
 	/**
@@ -166,7 +247,7 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Map<String, Integer> wordCount(String string) {
-		// TODO Write an implementation for this method declaration
+
 		return null;
 	}
 
@@ -246,8 +327,26 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String toPigLatin(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		
+		String newWord = "";
+		
+		if (isVowel(string.charAt(0))){
+			newWord = string + "ay";
+		} 
+		
+		for (int i=0; i < string.charAt(i); i++) {
+			if (isVowel(string.charAt(i))) {
+				newWord = string.substring(i) + string.substring(0,i) + "ay";
+				break;
+			}
+		}
+		
+		return newWord;
+	}
+	
+	public boolean isVowel(char c) {
+		return (c == 'a' || c == 'e' || c == 'i' ||
+				c == 'o' || c== 'u');
 	}
 
 	/**
@@ -266,7 +365,14 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isArmstrongNumber(int input) {
-		// TODO Write an implementation for this method declaration
+		int digits = 0;
+		
+		while (input != 0) {
+			input /= 10;
+			++digits;
+		}
+		
+	
 		return false;
 	}
 
