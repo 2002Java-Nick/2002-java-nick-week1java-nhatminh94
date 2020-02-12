@@ -434,10 +434,30 @@ public class EvaluationService {
 		}
 
 		public String rotate(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			
+			char[] charArray = string.toCharArray();
+			
+			String rotatedString = "";
+			for (int i =0; i<charArray.length; i++) {
+				if(Character.isLetter(charArray[i])) {
+					if(Character.isUpperCase(charArray[i])) {
+						rotatedString += (char)(((charArray[i]) + key - 65) % 26 + 65);
+					} else if (Character.isLowerCase(charArray[i])) {
+						rotatedString += (char)(((charArray[i]) + key - 97) % 26 + 97);
+				}
+				
+			} else {
+				if(Character.isUpperCase(charArray[i])) {
+					rotatedString += (char)(((charArray[i]) + key - 65) % 26 + 65);
+				} else if (Character.isLowerCase(charArray[i])) {
+					rotatedString += (char)(((charArray[i]) + key - 97) % 26 + 97);
+				
+			}
+			}
 		}
+			return rotatedString;
 
+	}
 	}
 
 	/**
@@ -453,8 +473,21 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int calculateNthPrime(int i) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		int primeNumber = 1;
+		int count = 0;
+		int numb;
+		while (count < i) {
+			primeNumber++;
+			for( numb=2; numb <= primeNumber; numb++) {
+			if (primeNumber % numb == 0) {
+				break;
+			}
+			}
+			if ( numb == primeNumber) {
+				count++;
+			}
+		}
+		return primeNumber;
 	}
 
 	/**
