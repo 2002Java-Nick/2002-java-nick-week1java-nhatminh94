@@ -234,6 +234,14 @@ public class EvaluationService {
 	 */
 	public String cleanPhoneNumber(String string) {
 		String fixed = string.replaceAll("[^0-9]","");
+		
+		if (fixed.length() > 11) {
+			throw new IllegalArgumentException();
+		}
+		
+		if (!fixed.matches("[0-9]+")) {
+			throw new IllegalArgumentException();
+		}
 		return fixed;
 	}
 
@@ -445,14 +453,9 @@ public class EvaluationService {
 					} else if (Character.isLowerCase(charArray[i])) {
 						rotatedString += (char)(((charArray[i]) + key - 97) % 26 + 97);
 				}
+				} else {
+				rotatedString += (char)(charArray[i]);
 				
-			} else {
-				if(Character.isUpperCase(charArray[i])) {
-					rotatedString += (char)(((charArray[i]) + key - 65) % 26 + 65);
-				} else if (Character.isLowerCase(charArray[i])) {
-					rotatedString += (char)(((charArray[i]) + key - 97) % 26 + 97);
-				
-			}
 			}
 		}
 			return rotatedString;
@@ -523,8 +526,18 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String encode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			
+			string.toLowerCase();
+			char[] charArray = string.toCharArray();
+			
+			String rotatedString = "";
+			
+			for (int i =0; i<charArray.length; i++) {
+				if(Character.isLetter(charArray[i])) {
+					rotatedString += (char)(((charArray[i]) + 23 - 65) % 26 + 65);
+					}
+				}
+			return rotatedString;
 		}
 
 		/**
@@ -562,9 +575,35 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isValidIsbn(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		string = string.replaceAll("-","");
+
+		int result = 0;
+		int moduloCheck;
+		char lastDigit = string.charAt(9);
+		for (int i =0; i < 9; i++) {
+			if(!Character.isDigit(string.charAt(i))) {
+				return false;
+			} else {
+				result += ((string.charAt(i) - '0') * (10 -i));
+		}
+		}
+		
+		if(lastDigit == 'X') {
+			result += 10;
+		} else if (Character.isDigit(string.charAt(9))) {
+			result += (string.charAt(9) - '0');
+		} else {
+			return false;
+		}
+
+		moduloCheck = result % 11;
+		if (moduloCheck == 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
+
 
 	/**
 	 * 16. Determine if a sentence is a pangram. A pangram (Greek: παν γράμμα, pan
@@ -580,8 +619,26 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isPangram(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		
+		boolean[] checkArray = new boolean[26];
+		string.replaceAll("\\s", "");
+		if(string.isEmpty()) {
+			return false;
+		}
+		
+		int index = 0;
+		
+		for (int i =0; i < string.length(); i++) {
+			index = string.charAt(i) - 97;
+		}
+		checkArray[index] =true;
+
+		for (int i=0; i < checkArray.length;i++){
+			if (checkArray[index] != true) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
