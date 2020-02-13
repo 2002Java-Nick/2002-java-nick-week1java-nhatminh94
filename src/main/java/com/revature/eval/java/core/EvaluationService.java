@@ -233,15 +233,17 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
+		
+		if (string.matches("[a-zA-Z0-9_-]")){
+			throw new IllegalArgumentException();
+		}
+		
 		String fixed = string.replaceAll("[^0-9]","");
 		
 		if (fixed.length() > 11) {
 			throw new IllegalArgumentException();
-		}
-		
-		if (!fixed.matches("[0-9]+")) {
-			throw new IllegalArgumentException();
-		}
+		} 
+
 		return fixed;
 	}
 
@@ -255,8 +257,18 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Map<String, Integer> wordCount(String string) {
-
-		return null;
+		String[] stringArray = string.split("[, ]+");
+		Map <String, Integer> values = new HashMap<String, Integer>();
+		
+		int count = 0;
+		for(String s: stringArray ) {
+			if (values.containsKey(s)) {
+				values.put(s, count++);
+				} else {
+					values.put(s, 1);
+				}
+		}
+		return values;
 	}
 
 	/**
@@ -403,7 +415,7 @@ public class EvaluationService {
 	 * @return
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) {
-		// TODO Write an implementation for this method declaration
+		List list = new List;
 		return null;
 	}
 
@@ -668,8 +680,8 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+			
+	return 5;		
 	}
 
 	/**
