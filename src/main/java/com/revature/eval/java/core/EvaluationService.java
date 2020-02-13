@@ -1,6 +1,7 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -415,8 +416,16 @@ public class EvaluationService {
 	 * @return
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) {
-		List list = new List;
-		return null;
+		
+		List<Long> theList = new ArrayList<>();;
+
+		for(long i = 2; i <= l; i ++) {
+			while (l % i == 0) {
+				theList.add(i);
+				l = l/i;
+			}
+		}
+		return theList;
 	}
 
 	/**
@@ -721,8 +730,30 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isLuhnValid(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		
+		if (string.matches(".*[a-z].*")) {
+			return false;
+		}
+		
+		int sum = 0;
+		
+		string = string.replaceAll("[^0-9]", "");
+		String[] strArray = string.split("");
+		Integer[] intArray = new Integer[strArray.length];
+		for (int i =0; i < strArray.length; i++) {
+			intArray[i] = Integer.parseInt(strArray[i]);
+		}
+		
+		for (int i = 1; i < intArray.length;i = i +2) {
+			intArray[i] = (intArray[i]) * 2;
+			sum += intArray[i];
+		}
+		
+		if (sum % 10 == 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
