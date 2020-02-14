@@ -234,12 +234,11 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
+
 		
-		if (string.matches("[a-zA-Z0-9_-]")){
-			throw new IllegalArgumentException();
-		}
 		
 		String fixed = string.replaceAll("[^0-9]","");
+
 		
 		if (fixed.length() > 11) {
 			throw new IllegalArgumentException();
@@ -307,11 +306,19 @@ public class EvaluationService {
 	 * binary search is a dichotomic divide and conquer search algorithm.
 	 * 
 	 */
-	static class BinarySearch<T> {
+	static class BinarySearch<T extends Comparable<T>>{
 		private List<T> sortedList;
 
 		public int indexOf(T t) {
-			// TODO Write an implementation for this method declaration
+			int min = 0;
+			int max = getSortedList().size();
+			
+			int guessSpot = (int)((max - min)/2);
+			System.out.println(guessSpot);
+			
+			
+			
+			
 			return 0;
 		}
 
@@ -548,17 +555,7 @@ public class EvaluationService {
 		 */
 		public static String encode(String string) {
 			
-			string.toLowerCase();
-			char[] charArray = string.toCharArray();
 			
-			String rotatedString = "";
-			
-			for (int i =0; i<charArray.length; i++) {
-				if(Character.isLetter(charArray[i])) {
-					rotatedString += (char)(((charArray[i]) + 23 - 65) % 26 + 65);
-					}
-				}
-			return rotatedString;
 		}
 
 		/**
@@ -731,6 +728,10 @@ public class EvaluationService {
 	 */
 	public boolean isLuhnValid(String string) {
 		
+		if (string.contains("-")) {
+			return false;
+		}
+		
 		if (string.matches(".*[a-z].*")) {
 			return false;
 		}
@@ -739,13 +740,23 @@ public class EvaluationService {
 		
 		string = string.replaceAll("[^0-9]", "");
 		String[] strArray = string.split("");
-		Integer[] intArray = new Integer[strArray.length];
+		
+		Integer[] intArray = new Integer[strArray.length]; 
+		
 		for (int i =0; i < strArray.length; i++) {
 			intArray[i] = Integer.parseInt(strArray[i]);
 		}
 		
 		for (int i = 1; i < intArray.length;i = i +2) {
 			intArray[i] = (intArray[i]) * 2;
+			
+			if (intArray[i] > 9) {
+				intArray[i] = intArray[i] - 9;
+			}
+		}
+		
+		for (int i =0; i < intArray.length; i++) {
+			
 			sum += intArray[i];
 		}
 		
@@ -753,7 +764,7 @@ public class EvaluationService {
 			return true;
 		} else {
 			return false;
-		}
+	}
 	}
 
 	/**
@@ -784,8 +795,40 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int solveWordProblem(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
-	}
 
+		int result = 0;
+		
+		String plus = "plus";
+		String minus = "minus";
+		String multiplied = "multiplied";
+		String divided = "divided";
+		
+		Integer[] intArray = new Integer[2];
+		
+		
+		String[] strArray = string.split("[ \\?]");
+		for(int i =0; i < strArray.length;i++) {
+			if(strArray[i].equals(minus)) {
+				intArray[0] = Integer.parseInt(strArray[2]);
+				intArray[1] = Integer.parseInt(strArray[strArray.length -1 ]);
+				result = intArray[0] - intArray[1];
+			} 
+			else if(strArray[i].equals(plus)) {
+				intArray[0] = Integer.parseInt(strArray[2]);
+				intArray[1] = Integer.parseInt(strArray[strArray.length -1 ]);
+				result = intArray[0] + intArray[1];
+			}
+			else if(strArray[i].equals(multiplied)) {
+				intArray[0] = Integer.parseInt(strArray[2]);
+				intArray[1] = Integer.parseInt(strArray[strArray.length -1 ]);
+				result = intArray[0] * intArray[1];
+			}
+			else if(strArray[i].equals(divided)) {
+				intArray[0] = Integer.parseInt(strArray[2]);
+				intArray[1] = Integer.parseInt(strArray[strArray.length -1 ]);
+				result = intArray[0] / intArray[1];
+			}
+		}
+		return result;
+	}
 }
