@@ -2,9 +2,12 @@ package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class EvaluationService {
 
@@ -310,11 +313,21 @@ public class EvaluationService {
 		private List<T> sortedList;
 
 		public int indexOf(T t) {
-			int min = 0;
-			int max = getSortedList().size();
 			
-			int guessSpot = (int)((max - min)/2);
-			System.out.println(guessSpot);
+			String string = sortedList.toString();
+			char[] stringArray = string.toCharArray();
+			int min = 0;
+			int max = sortedList.size() - 1;
+			
+			//while (min <= max) {
+				//int mid = min + ((max - min) / 2);
+				
+				//if(sortedList[mid] == t) {
+					
+				//}
+			//}
+			
+			
 			
 			
 			
@@ -555,8 +568,54 @@ public class EvaluationService {
 		 */
 		public static String encode(String string) {
 			
+			HashMap<String,String> map = new HashMap<>();
+			map.put("a", "z");
+			map.put("b", "y");
+			map.put("c", "x");
+			map.put("d", "w");
+			map.put("e", "v");
+			map.put("f", "u");
+			map.put("g", "t");
+			map.put("h", "s");
+			map.put("i", "r");
+			map.put("j", "q");
+			map.put("k", "p");
+			map.put("l", "o");
+			map.put("m", "n");
+			map.put("n", "m");
+			map.put("o", "l");
+			map.put("p", "k");
+			map.put("q", "j");
+			map.put("r", "i");
+			map.put("s", "h");
+			map.put("t", "g");
+			map.put("u", "f");
+			map.put("v", "e");
+			map.put("w", "d");
+			map.put("x", "c");
+			map.put("y", "b");
+			map.put("z", "a");
 			
+			String fixed = string.replaceAll("\\p{Punct}", "").replaceAll(" ", "").toLowerCase();
+			String[] strArray = fixed.split("");
+			String message = "";
+			
+			
+			for (int i =0; i < strArray.length;i++) {
+				if(map.containsKey(strArray[i])) {
+					message += map.get(strArray[i]);
+				} else {
+					message += strArray[i];
+				}
+			}
+			
+			int val = 5;
+			message = message.replaceAll("(.{" + val + "})", "$1 ").trim();
+			
+			return message;
+		
 		}
+		
 
 		/**
 		 * Question 14
@@ -565,9 +624,51 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String decode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
-		}
+			
+			HashMap<String,String> map = new HashMap<>();
+			map.put("a", "z");
+			map.put("b", "y");
+			map.put("c", "x");
+			map.put("d", "w");
+			map.put("e", "v");
+			map.put("f", "u");
+			map.put("g", "t");
+			map.put("h", "s");
+			map.put("i", "r");
+			map.put("j", "q");
+			map.put("k", "p");
+			map.put("l", "o");
+			map.put("m", "n");
+			map.put("n", "m");
+			map.put("o", "l");
+			map.put("p", "k");
+			map.put("q", "j");
+			map.put("r", "i");
+			map.put("s", "h");
+			map.put("t", "g");
+			map.put("u", "f");
+			map.put("v", "e");
+			map.put("w", "d");
+			map.put("x", "c");
+			map.put("y", "b");
+			map.put("z", "a");
+			
+			String fixed = string.replaceAll("\\p{Punct}", "").replaceAll(" ", "").toLowerCase();
+			String[] strArray = fixed.split("");
+			String message = "";
+			
+			
+			for (int i =0; i < strArray.length;i++) {
+				if(map.containsValue((strArray[i]))) {
+					message += map.get(strArray[i]);
+				} else {
+					message += strArray[i];
+				}
+			}
+			
+			return message;
+		
+	}
 	}
 
 	/**
@@ -638,25 +739,56 @@ public class EvaluationService {
 	 */
 	public boolean isPangram(String string) {
 		
-		boolean[] checkArray = new boolean[26];
 		string.replaceAll("\\s", "");
+		
 		if(string.isEmpty()) {
 			return false;
 		}
-		
-		int index = 0;
-		
-		for (int i =0; i < string.length(); i++) {
-			index = string.charAt(i) - 97;
-		}
-		checkArray[index] =true;
 
-		for (int i=0; i < checkArray.length;i++){
-			if (checkArray[index] != true) {
-				return false;
+		HashMap<String,Integer> map = new HashMap<>();
+		map.put("a", 0);
+		map.put("b", 0);
+		map.put("c", 0);
+		map.put("d", 0);
+		map.put("e", 0);
+		map.put("f", 0);
+		map.put("g", 0);
+		map.put("h", 0);
+		map.put("i", 0);
+		map.put("j", 0);
+		map.put("k", 0);
+		map.put("l", 0);
+		map.put("m", 0);
+		map.put("n", 0);
+		map.put("o", 0);
+		map.put("p", 0);
+		map.put("q", 0);
+		map.put("r", 0);
+		map.put("s", 0);
+		map.put("t", 0);
+		map.put("u", 0);
+		map.put("v", 0);
+		map.put("w", 0);
+		map.put("x", 0);
+		map.put("y", 0);
+		map.put("z", 0);
+		
+		String[] strArray = string.split("");
+		
+		for (int i =0; i < strArray.length;i++) {
+			if(map.containsKey(strArray[i])) {
+				map.put(strArray[i], 1);
+				
 			}
 		}
-		return true;
+		
+		if(map.containsValue(0)) {
+			return false;
+		}else {
+			return true;
+		}
+		
+
 	}
 
 	/**
@@ -686,8 +818,27 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
-			
-	return 5;		
+		
+		int sum = 0;
+		int result = 0;
+		
+		Set<Integer> newSet = new HashSet<Integer>();
+		
+		for (int s = 0; s < i; s++) {
+			for(int ii = 0; ii < set.length; ii++) {
+				sum = s % set[ii];
+				if(sum == 0) {
+					newSet.add(s);
+				
+			}
+			}
+		}
+		
+		for(int plus : newSet) {
+			result += plus;
+		}
+		return result;
+		
 	}
 
 	/**
