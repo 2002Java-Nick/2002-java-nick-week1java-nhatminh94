@@ -1,5 +1,7 @@
 package com.revature.eval.java.core;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -238,7 +240,9 @@ public class EvaluationService {
 	 */
 	public String cleanPhoneNumber(String string) {
 
-		
+		if (string.contains("@") || string.contains("!")) {
+			throw new IllegalArgumentException();
+		}
 		
 		String fixed = string.replaceAll("[^0-9]","");
 
@@ -260,7 +264,7 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Map<String, Integer> wordCount(String string) {
-		String[] stringArray = string.split("[, ]+");
+		String[] stringArray = string.split("[, \\n]+");
 		Map <String, Integer> values = new HashMap<String, Integer>();
 		
 		int count = 0;
@@ -314,25 +318,28 @@ public class EvaluationService {
 
 		public int indexOf(T t) {
 			
-			String string = sortedList.toString();
-			char[] stringArray = string.toCharArray();
+			int mid = 0;
 			int min = 0;
-			int max = sortedList.size() - 1;
-			
-			//while (min <= max) {
-				//int mid = min + ((max - min) / 2);
-				
-				//if(sortedList[mid] == t) {
-					
-				//}
-			//}
+			int max = sortedList.size();
 			
 			
+			while (min <= max) {
+				 mid = ((max - min)/2);
+				 if (t == getSortedList().get(mid)) {
+					 return mid;
+				 } else {
+					 for (T e : sortedList) {
+						 if (e.compareTo(t) > 0) {
+							 max--;
+						 } else if (e.compareTo(t) < 0){
+							 max++;
+						 }
+					 }
+				 }
+			}
 			
-			
-			
-			
-			return 0;
+			return mid;
+
 		}
 
 		public BinarySearch(List<T> sortedList) {
@@ -368,6 +375,7 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String toPigLatin(String string) {
+		
 		
 		String newWord = "";
 		
@@ -517,6 +525,12 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int calculateNthPrime(int i) {
+		
+		if(i == 0) {
+			throw new IllegalArgumentException();
+		}
+		
+		
 		int primeNumber = 1;
 		int count = 0;
 		int numb;
@@ -800,7 +814,18 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Temporal getGigasecondDate(Temporal given) {
-		// TODO Write an implementation for this method declaration
+		
+		Temporal result;
+		if (given instanceof LocalDate) {
+			result = ((LocalDate)given).atStartOfDay().plusSeconds(1000000000);
+			return result;
+		} else if (given instanceof LocalDateTime) {
+			result = ((LocalDateTime)given).plusSeconds(1000000000);
+			return result;
+			
+		}
+		
+		
 		return null;
 	}
 
