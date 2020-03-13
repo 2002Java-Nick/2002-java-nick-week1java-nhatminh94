@@ -1,0 +1,58 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Insert Data</title>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link rel='stylesheet' type='text/css' media='screen' href='p1form.css'> 
+</head>
+<body>  
+      <form id ="submitForm" action="/CarDealership/form" method="post">
+      		<h1>Reimbursement Form</h1>
+      		<label for="name">Name</label><br>  
+            <input type="text" id="name" name="name" required><br>
+            <label for="address">Address</label><br>  
+            <input type="text" id="address" name="address" required><br>
+            <label for="phone">Phone number</label><br>  
+            <input type="text" id="phone" name="phone" required><br>
+            <label for="type">Event type</label><br> 
+            <select id ="type" name="type" >
+                <option value="zz" disabled selected>select type</option>  
+                <option value="University Courses">University Courses (80%)</option>
+                <option value="Seminars">Seminars (60%)</option>
+                <option value="Certificate Prep Class">Certificate Prep Class (75%)</option>
+                <option value="Certification">Certification (100%)</option>
+                <option value="Technical Training">Technical Training (90%)</option>
+                <option value="Other">Other (30%)</option>
+            </select><br>
+            <label for="description">Event description</label><br>  
+            <input type="text" id="description" name="description" required><br>
+            <label for="location">Event location</label><br>  
+            <input type="text" id="location" name="location" required><br>
+            <label for="date">Event date</label><br>  
+            <input type="date" id="date" name="date" onclick="nextweek()" required><br>
+            <label for="cost">Event cost</label><br>  
+            <input type="number" id="cost" name="cost" step="any" required><br>
+            <label for="multi">Projected reimbursement amount</label><br>  
+            <span id = "multi"></span><br>
+            <label for="grading_format">Grading format</label><br>
+            <select name="grading_format">
+            	<option value="zz" disabled selected>select format</option>  
+                <option value="Percentage %">Percentage %</option>
+                <option value="Presentation">Presentation</option>
+                <option value="Other format">Other format</option>
+            </select><br>
+            <label for="attachment">Attach a file</label><br>  
+            <input type="file" id="attachment" name="attachment"><br><br>
+
+            <button type="submit" id="submitButton" class="btn btn-primary">Submit Form</button>
+            <button type="submit" id="submitButton" class="btn btn-primary"
+    onclick="window.location.href = 'http://localhost:8080/CarDealership/pages/welcome.html';">Return Page</button>
+      </form>
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+   	  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+ 	  <script src='/CarDealership/scripts/form.js'></script>
+   </body>  
+</html>

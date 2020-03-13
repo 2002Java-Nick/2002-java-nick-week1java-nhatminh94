@@ -1,0 +1,16 @@
+body{
+
+  font-family: "Lato", sans-serif;
+  background-image: url("manager.jpg");
+   background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.btn-primary{
+    background-color: #000;
+    color: #fff;
+}
+
+.thebody{
+	padding: 60px;
+}

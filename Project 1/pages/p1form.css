@@ -1,0 +1,14 @@
+body {
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  background-image:url("form.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.btn-primary{
+    background-color: #000 ;
+    color: #fff;
+}
+
+

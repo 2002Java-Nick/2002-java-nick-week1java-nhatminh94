@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>List of submitted forms</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel='stylesheet' type='text/css' media='screen' href='viewForm.css'>
+</head>
+
+<body>
+
+	<form class="choice" id ="submitForm" action="/CarDealership/dsviewForm" method="post">
+    <div id="carList" class="table-responsive">
+        <table id="carTable" class="table table-bordered table-dark">
+            <tr id="headerRow">
+                <th id="formid">FormID</th>
+                <th id="empid">EmpID</th>
+                <th id="name">Name</th>
+                <th id="address">Address</th>
+                <th id="phone">Phone Number</th>
+                <th id="type">Event Type</th>
+                <th id="description">Event Description</th>
+                <th id="location">Event Location</th>
+                <th id="submit_date">Date Submitted</th>
+                <th id="start_date">Event Date</th>
+                <th id="is_urgent">Is Urgent</th>
+                <th id="cost">Event Cost</th>
+                <th id="reimbursement_amount">Reimbursement Amount</th>
+                <th id="grading_format">Grading Format</th>
+                <th id="ds_approved">DS Aprroval</th>
+                <th id="dh_approved">DH Approval</th>
+                <th id="bs_approved">BC Approval</th>
+                <th id="awarded">Reimbursement Awarded</th>
+                
+                
+                
+            </tr>
+        </table>
+        
+        
+        	<h2>Choose a form to edit</h2>
+        	<label for="formid2">Type in FormID</label><br>  
+            <input type="number" id="formid2" name="formid2" required><br>
+            <select name="decision">
+            	<option value="zz" disabled selected>select edit</option>  
+                <option value="Accept">Accept</option>
+                <option value="Deny">Deny</option>
+                <option value="Request More Info">Request More Info</option>
+            </select><br><br>
+            <button type="submit" id="submitButton" class="btn btn-primary">Save and Exit</button>
+            <button type="submit" id="submitButton" class="btn btn-primary"
+    onclick="window.location.href = 'http://localhost:8080/CarDealership/pages/manager.html';">Return Page</button>
+
+    </div>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="/CarDealership/scripts/dsviewForm.js"></script>
+</body>
+
+</html>
